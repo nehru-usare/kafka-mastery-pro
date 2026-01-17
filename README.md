@@ -67,9 +67,32 @@ Think of Kafka as a **Courier Office**:
 
 ## ⚙️ Chapter 5: Setting Up Your Environment
 
-- **Java 21**: Required for modern Spring Boot features.
-- **Docker**: To run Kafka using `docker-compose.yml`.
-- **Maven**: To build the multi-module project.
+To run this project, you need three key tools installed on your machine. Follow these steps if you are starting from zero:
+
+### 1. Java 21 (The Engine)
+We use **Java 21** because it is the latest LTS (Long Term Support) version and is required for Spring Boot 3.4.
+- **Check version**: Open terminal and type `java -version`.
+- **Install**: If not found, download from [Oracle](https://www.oracle.com/java/technologies/downloads/) or use [SDKMAN](https://sdkman.io/).
+
+### 2. Docker & Docker Desktop (The Infrastructure)
+Kafka is difficult to install directly on Windows or Mac. **Docker** allows us to run a "Container" (a mini virtual computer) that has Kafka perfectly pre-configured.
+- **Install**: Download [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+- **Starting Kafka**: Once Docker is running, navigate to the project root and run:
+  ```bash
+  docker-compose up -d
+  ```
+  - `up`: Starts the containers.
+  - `-d`: "Detached" mode (runs in the background).
+- **Verify**: Check Docker Desktop dashboard; you should see a container named `kafka-broker` running.
+
+### 3. Maven (The Build Tool)
+Maven downloads all the libraries (Spring, Kafka Client, etc.) and compiles your Java code.
+- **Check version**: Run `mvn -version`.
+- **Install**: Most IDEs (IntelliJ, VS Code) come with Maven, but you can download it from [Apache Maven](https://maven.apache.org/download.cgi).
+- **Build Command**: To build and install the entire project, run this from the **root directory**:
+  ```bash
+  mvn clean install -DskipTests
+  ```
 
 ---
 
@@ -115,7 +138,7 @@ Invoke-RestMethod -Method Post -Uri "http://localhost:8081/orders" -ContentType 
 ## 📡 Chapter 10: Postman & WebSocket Testing
 
 ### A. Real-time Dashboard
-Open `http://localhost:8083/` in your browser. Watch alerts pop up instantly!
+Open your browser to: **[http://localhost:8083/index.html](http://localhost:8083/index.html)**. Watch alerts pop up instantly!
 
 ### B. Postman WebSocket Setup
 1. **URL**: `ws://localhost:8083/ws-notification/websocket`
@@ -138,4 +161,7 @@ destination:/topic/notifications
 
 ---
 
+---
+
+**Author**: Nehru Usare
 **Summary**: Use this project to master the backbone of modern event-driven architecture. Happy Coding! 🌟
